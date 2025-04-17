@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD PHP dengan Foto</title>
+</head>
+<body>
+
+<h2>Daftar Pengguna</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Foto</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php while ($row = $result->fetch_assoc()): ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['name']; ?></td>
+            <td><?php echo $row['email']; ?></td>
+            <td><img src="uploads/<?php echo $row['foto']; ?>" width="100"></td>
+            <td>
+                <a href="index.php?delete=<?php echo $row['id']; ?>">Delete</a>
+                <a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a>
+            </td>
+        </tr>
+        <?php endwhile; ?>
+    </tbody>
+</table>
+
+<h2>Tambah Pengguna</h2>
+<form method="POST" enctype="multipart/form-data">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="foto">Foto:</label><br>
+    <input type="file" id="foto" name="foto" accept="image/*" required><br><br>
+    <input type="submit" name="insert" value="Tambah">
+</form>
+
+</body>
+</html>
